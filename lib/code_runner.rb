@@ -9,7 +9,6 @@ class CodeRunner
   class NoCompatibleRunner < RuntimeError; end
 
   def run(filename)
-    puts filename
     runner = AVAILABLE_RUNNERS.detect { |r| r.accepts_filename?(filename) }
 
     raise NoCompatibleRunner, 'File type not supported yet. ' if runner.nil?
