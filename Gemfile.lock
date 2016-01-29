@@ -6,6 +6,8 @@ GEM
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
+    rack-test (0.6.3)
+      rack (>= 1.0)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -30,8 +32,9 @@ PLATFORMS
 
 DEPENDENCIES
   puma
+  rack-test
   rspec
   sinatra
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
