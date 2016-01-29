@@ -1,6 +1,8 @@
+require 'code_runners/base_code_runner'
+
 require 'open3'
 
-class InterpretedCodeRunner
+class InterpretedCodeRunner < BaseCodeRunner
   class EnvironmentError < RuntimeError; end
 
   SILENCE_OUTPUT = ' 1>/dev/null 2>/dev/null'

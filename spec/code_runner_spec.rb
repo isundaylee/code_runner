@@ -30,5 +30,17 @@ describe CodeRunner do
       # We only test stdout here, as stderr and status has enough coverage already.
       expect(result[:stdout]).to eq("Hello, world! \n")
     end
+
+    it 'should be able to run zipfile with makefile in the root directory' do
+      zipfile = create_zip_file({
+        'test.rb' => 'puts "Hello"; $stderr.puts "error"', 
+        'makefile' => "run:\n\t@ruby test.rb"
+      })
+
+      result = @runner.run(zipfile)
+
+      # We only test stdout here, as stderr has enough coverage already.
+      expect(result[:stdout]).to eq("Hello\n")
+    end
   end
 end

@@ -13,14 +13,15 @@ class CodeRunnerApp < Sinatra::Base
   post '/' do
     content_type :json
 
-    if params['code'].nil? || params['code'][:filename].nil?
+    if (params['code'].nil? || params['code'][:filename].nil?) &&
+       (params['zip_file'].nil? || params['zip_file'][:filename].nil?)
       status 400
-      body ({success: false, error: "Missing `code' parameter. "}).to_json
+      body ({success: false, error: "Missing `code' or `zip_file' parameter. "}).to_json
       return
     end
 
     begin
-      result = @@runner.run(params['code'][:tempfile].path)
+      result = @@runner.run((params['code'] || params['zip_file'])[:tempfile].path)
 
       status 200
       body result.merge({success: true}).to_json
